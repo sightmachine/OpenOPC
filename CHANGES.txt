@@ -1,0 +1,46 @@
+OpenOPC for Python 1.2.0
+Copyright (c) 2008-2012 by Barry Barnreiter (barry_b@users.sourceforge.net)
+
+http://openopc.sourceforge.net/
+
+
+RELEASE NOTES
+February 11, 2012
+
+
+1. In previous versions of OpenOPC the Gateway Service would sometimes fail
+to bind to a TCP port, thus causing the service to not listen for incoming
+connections.  This would only occur on systems containing multiple ethernet
+interfaces and the failure would not be consistent or predictible.
+
+In such situations you can now tell the Gateway Service which ethernet
+interface to bind to by setting the OPC_GATE_HOST system enviornment
+variable equal to the IP address of the desired ethernet interface.
+
+It is recommended that this setting be made on all computers with more
+than one active ethernet interface.   System enviornment variables can
+be set using the "System" applet inside the Windows Control Panel.
+
+2. In some cases the opc.read() function would attempt to automatically
+destoy an OPC group that no longer existed.  This would result in an
+exception being thrown.  This bug has been fixed.
+
+3. The OpenOPC installer has been updated to check for multiple versions
+of Python when installing the Development Library.   Previous versions
+of the installer only checked for the older Python 2.5.
+
+4. The included opc.exe and OpenOPCService.exe executibles have been
+built using Python 2.7.2 and Pyro 3.15.  Older versions were built using
+Pyro 3.10 which is not protocol compatible with the newer Pyro 3.15.
+Thus you cannot use a prior version of the client with the newer gateway
+service or vice versa.   Please update all your instances of OpenOPC
+at the same time in order to avoid this compatibility issue.
+
+5. OpenOPC has been tested with Python 2.7.  Previous versions were
+only tested using Python 2.5 and 2.6.
+
+6. OpenOPC has been tested with Windows 7 (64-bit).  Previous versions
+were only tested using Windows Server 2003 and XP.
+
+7. The opc.py and OpenOPCService.py code has been modifed to work with
+PyInstaller.  Previous versions could only be built using py2exe.
